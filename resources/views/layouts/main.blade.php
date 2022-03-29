@@ -206,6 +206,13 @@
                         </li>
 
                         <li>
+                            <a href="/admin/omset">
+                                <i class="mdi mdi-badge-account"></i>
+                                <span> Omset </span>
+                            </a>
+                        </li>
+
+                        <li>
                             <a href="/admin/jenis-usaha">
                                 <i class="mdi mdi-format-list-bulleted-type"></i>
                                 <span> Jenis Usaha </span>

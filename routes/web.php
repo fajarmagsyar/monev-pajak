@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\JenisUsahaController;
 use App\Http\Controllers\UsahaController;
+use App\Http\Controllers\OmsetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,9 @@ Route::prefix('admin')->group(function () {
 
     // USAHA
     Route::resource('/usaha', UsahaController::class);
+
+    // OMSET
+    Route::resource('/omset', OmsetController::class);
+    Route::get('/omset/tambah/data', [OmsetController::class, 'create']);
+    Route::get('/omset/edit/data', [OmsetController::class, 'edit']);
 });
