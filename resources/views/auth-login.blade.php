@@ -33,38 +33,30 @@
 
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-4">
-                    <div class="text-center">
+                    <div class="text-center mb-4">
                         <a href="index.html">
-                            <img src="/assets/images/logo-dark.png" alt="" height="22" class="mx-auto">
+                            <img src="/assets/images/logo-dark.png" alt="" height="80" class="mx-auto">
                         </a>
-                        <p class="text-muted mt-2 mb-4">Responsive Admin Dashboard</p>
-
+                        <p style="font-size: 20px"><b>K</b>ota <b>K</b>upang</p>
                     </div>
-                    <div class="card">
+                    <div class="card shadow" style="border-radius: 25px">
                         <div class="card-body p-4">
 
                             <div class="text-center mb-4">
-                                <h4 class="text-uppercase mt-0">Sign In</h4>
+                                <h4 class="text-uppercase mt-0">Login</h4>
                             </div>
 
                             <form action="#">
                                 <div class="mb-3">
-                                    <label for="emailaddress" class="form-label">Email address</label>
+                                    <label for="emailaddress" class="form-label">Email</label>
                                     <input class="form-control" type="email" id="emailaddress" required=""
-                                        placeholder="Enter your email">
+                                        placeholder="Masukkan Email">
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
+                                <div class="mb-4">
+                                    <label for="password" class="form-label">Kata Sandi</label>
                                     <input class="form-control" type="password" required="" id="password"
-                                        placeholder="Enter your password">
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox-signin" checked>
-                                        <label class="form-check-label" for="checkbox-signin">Remember me</label>
-                                    </div>
+                                        placeholder="Masukkan Kata Sandi">
                                 </div>
 
                                 <div class="mb-3 d-grid text-center">
@@ -79,9 +71,10 @@
                     <div class="row mt-3">
                         <div class="col-12 text-center">
                             <p> <a href="pages-recoverpw.html" class="text-muted ms-1"><i
-                                        class="fa fa-lock me-1"></i>Forgot your password?</a></p>
-                            <p class="text-muted">Don't have an account? <a href="pages-register.html"
-                                    class="text-dark ms-1"><b>Sign Up</b></a></p>
+                                        class="fa fa-lock me-1"></i>Lupa password?</a></p>
+                            <p class="text-muted">Belum ada akun?
+                                <a href="#" class="text-dark ms-1"><b>Buat Akun</b></a>
+                            </p>
                         </div> <!-- end col -->
                     </div>
                     <!-- end row -->

@@ -28,12 +28,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="float-end">
-                                    <a class="btn btn-sm btn-outline-success" href="/admin/jenis-usaha/tambah/data">+
+                                    <a class="btn btn-sm btn-outline-success" href="/admin/owner/create">+
                                         TAMBAH</a>
                                 </div>
-                                <h4 class="mt-0 header-title">Data Jenis Usaha</h4>
+                                <h4 class="mt-0 header-title">Data Owner</h4>
                                 <p class="text-muted font-14 mb-3">
-                                    Olah data jenis usaha yang menjadi pilihan dalam menambahkan usaha baru.
+                                    Olah data Owner yang menjadi pilihan dalam menambahkan usaha baru.
                                 </p>
 
                                 <div class="table-responsive">
@@ -41,36 +41,45 @@
                                         <thead class="table-dark">
                                             <tr>
                                                 <th>#</th>
-                                                <th>Nama Jenis Usaha</th>
-                                                <th>Dibuat</th>
-                                                <th>Terakhir Diubah</th>
+                                                <th>NIK</th>
+                                                <th>Nama Owner</th>
+                                                <th>Jenis Kelamin</th>
+                                                <th>Nomor Handphone</th>
+                                                <th>Alamat</th>
+                                                <th>NPWP Owner</th>
+                                                <th>Email</th>
+                                                <th>Password</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if (count($jenisUsahaRows) < 1)
+                                            @if (count($userRows) < 1)
                                                 <tr>
-                                                    <td colspan="5" class="text-center">Data belum ada, silahkan tambah
+                                                    <td colspan="10" class="text-center">Data belum ada, silahkan tambah
                                                         data</td>
                                                 </tr>
                                             @else
-                                                @foreach ($jenisUsahaRows as $key => $r)
+                                                @foreach ($userRows as $key => $r)
                                                     <tr>
                                                         <th scope="row">{{ $key = $key + 1 }}</th>
-                                                        <td>{{ $r->nama_jenis_usaha }}</td>
-                                                        <td>{{ $r->created_at }}</td>
-                                                        <td>{{ $r->updated_at }}</td>
+                                                        <td>{{ $r->no_identitas }}</td>
+                                                        <td>{{ $r->nama }}</td>
+                                                        <td>{{ $r->jk }}</td>
+                                                        <td>{{ $r->no_hp}}</td>
+                                                        <td>{{ $r->alamat}}</td>
+                                                        <td>{{ $r->npwp}}</td>
+                                                        <td>{{ $r->email}}</td>
+                                                        <td>{{ $r->password}}</td>
                                                         <td class="text-center">
-                                                            <form action="/admin/jenis-usaha/{{ $r->jenis_usaha_id }}"
+                                                            <form action="/admin/owner/{{ $r->user_id }}"
                                                                 method="post">
-                                                                <a href="/admin/jenis-usaha/{{ $r->jenis_usaha_id }}/edit"
+                                                                <a href="/admin/owner/{{ $r->user_id }}/edit"
                                                                     class="btn btn-sm btn-warning">
                                                                     <i class="mdi mdi-pencil"></i>
                                                                 </a>
                                                                 @method('DELETE')
                                                                 @csrf
                                                                 <button type="submit"
-                                                                    href="/admin/jenis-usaha/{{ $r->jenis_usaha_id }}"
                                                                     class="btn btn-sm btn-danger" class="d-inline">
                                                                     <i class="mdi mdi-delete"></i>
                                                                 </button>
@@ -84,13 +93,13 @@
                                 </div>
 
                             </div>
+                            <center>
+                                {{ $userRows->links() }}
+                            </center>
                         </div>
 
                     </div>
 
-                    <center>
-                        {{ $jenisUsahaRows->links() }}
-                    </center>
 
                 </div>
                 <!-- end row -->
