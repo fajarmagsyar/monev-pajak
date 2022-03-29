@@ -19,6 +19,7 @@ class Usaha extends Migration
             $table->uuid('usaha_id')->primary();
             $table->uuid('user_id')->nullable();
             $table->uuid('jenis_usaha_id')->nullable();
+            $table->string('nama_usaha')->nullable();
             $table->string('npwp_usaha', 16)->nullable();
             $table->string('surat_ijin_usaha')->nullable();
             $table->string('surat_ijin_bpom')->nullable();

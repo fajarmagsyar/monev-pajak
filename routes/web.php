@@ -27,4 +27,8 @@ Route::prefix('admin')->group(function () {
     Route::resource('/jenis-usaha', JenisUsahaController::class);
     Route::get('/jenis-usaha/tambah/data', [JenisUsahaController::class, 'tambah']);
     Route::resource('/owner', UsersController::class);
+
+    // USAHA
+    Route::resource('/usaha', UsahaController::class);
+
 });
