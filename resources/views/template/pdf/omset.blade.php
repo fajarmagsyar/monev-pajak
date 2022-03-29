@@ -9,20 +9,21 @@
 
 
     <style type="text/css">
-    table tr td,
-    table tr th {
-        font-size: 9pt;
+        table tr td,
+        table tr th {
+            font-size: 9pt;
 
-    }
+        }
 
-    .doc-title {
-        text-align: center;
-        font-size: 14px;
-    }
+        .doc-title {
+            text-align: center;
+            font-size: 14px;
+        }
 
-    @page {
-        size: A4 portrait;
-    }
+        @page {
+            size: A4 portrait;
+        }
+
     </style>
     <div>
         <div>
@@ -46,21 +47,21 @@
             <tbody>
                 @php $i=1 @endphp
                 @foreach ($rowsomset as $rows)
-                <tr>
-                    <td style="text-align: center;">
-                        {{ $i++ }}
-                    </td>
-                    <td>
-                        {{ $rows["nama_usaha"]  }}
-                    </td>
-                    <td>
-                        {{ Rp.{{ number_format($r->nominal)  }}
-                    </td>
-                    <td>
-                        {{ Rp.{{ number_format($r->pajak)  }}
-                    </td>
+                    <tr>
+                        <td style="text-align: center;">
+                            {{ $i++ }}
+                        </td>
+                        <td>
+                            {{ $rows['nama_usaha'] }}
+                        </td>
+                        <td>
+                            Rp.{{ number_format($rows->nominal) }}
+                        </td>
+                        <td>
+                            Rp.{{ number_format($rows->pajak) }}
+                        </td>
 
-                </tr>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
