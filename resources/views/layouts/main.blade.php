@@ -209,9 +209,9 @@
                         </li>
 
                         <li>
-                            <a href="/admin/owner">
+                            <a href="/admin/omset">
                                 <i class="mdi mdi-badge-account"></i>
-                                <span> Owner </span>
+                                <span> Omset </span>
                             </a>
                         </li>
 
