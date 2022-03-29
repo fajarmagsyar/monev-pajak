@@ -20,6 +20,8 @@ class Omset extends Migration
             $table->uuid('usaha_id')->nullable();
             $table->string('nominal')->nullable();
             $table->string('pajak')->nullable();
+            $table->uuid('transaksi_id')->nullable();
+            $table->date('paid_at')->nullable();
             $table->timestamps();
         });
         DB::statement('ALTER TABLE omset ALTER COLUMN omset_id SET DEFAULT uuid_generate_v4();');

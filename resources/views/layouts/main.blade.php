@@ -24,6 +24,7 @@
 
     <!-- icons -->
     <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/js/jquery-3.6.0.min.js"></script>
 
 </head>
 
@@ -192,13 +193,22 @@
 
                         <li class="menu-title">Navigation</li>
 
-                        <li>
-                            <a href="/admin/">
-                                <i class="mdi mdi-view-dashboard"></i>
-                                <span> Dashboard </span>
-                            </a>
-                        </li>
-
+                        @canany(['admin', 'juruPajak'])
+                            <li>
+                                <a href="/admin/">
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                    <span> Dashboard </span>
+                                </a>
+                            </li>
+                        @endcanany
+                        @canany(['owner'])
+                            <li>
+                                <a href="/admin/dashboard/owner">
+                                    <i class="mdi mdi-view-dashboard"></i>
+                                    <span> Dashboard </span>
+                                </a>
+                            </li>
+                        @endcanany
                         <li class="menu-title mt-2">Olah Data</li>
 
                         <li>
@@ -208,22 +218,35 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a href="/admin/omset">
-                                <i class="mdi mdi-badge-account"></i>
-                                <span> Omset </span>
-                            </a>
-                        </li>
+                        @canany(['admin'])
+                            <li>
+                                <a href="/admin/owner">
+                                    <i class="mdi mdi-badge-account"></i>
+                                    <span> Owner </span>
+                                </a>
+                            </li>
+                        @endcanany
+
+                        @canany(['owner'])
+                            <li>
+                                <a href="/admin/omset">
+                                    <i class="mdi mdi-chart-areaspline"></i>
+                                    <span> Omset </span>
+                                </a>
+                            </li>
+                        @endcanany
+
+                        @canany(['admin'])
+                            <li>
+                                <a href="/admin/jenis-usaha">
+                                    <i class="mdi mdi-format-list-bulleted-type"></i>
+                                    <span> Jenis Usaha </span>
+                                </a>
+                            </li>
+                        @endcanany
 
                         <li>
-                            <a href="/admin/jenis-usaha">
-                                <i class="mdi mdi-format-list-bulleted-type"></i>
-                                <span> Jenis Usaha </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="/riwayat-pajak">
+                            <a href="/admin/riwayat-pajak">
                                 <i class="mdi mdi-cash-multiple"></i>
                                 <span> Riwayat Pajak </span>
                             </a>

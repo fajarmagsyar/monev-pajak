@@ -17,45 +17,35 @@
                                     Pastikan data yang telah anda input benar dan sesuai dengan format yang tertera.
                                 </p>
 
-                                <form action="/admin/omset" class="parsley-examples" id="form-valid-parsley"
-                                    method="post">
+                                <form action="/admin/omset" class="parsley-examples" id="form-valid-parsley" method="post">
                                     @method('post')
                                     @csrf
-                                    <!-- <div class="mb-3">
-                                        <label for="userName" class="form-label">Nama Jenis Usaha
-                                            <span class="text-danger">*</span></label>
-                                        <input type="text" name="nama_jenis_usaha" parsley-trigger="change" required
-                                            placeholder="Masukkan jenis usaha" class="form-control" id="userName" />
-                                    </div>
-                                    <div class="text-end">
-                                        <button class="btn btn-primary waves-effect waves-light" type="submit"><i
-                                                class="mdi mdi-pencil-box"></i> Simpan</button>
-                                        <button type="reset" class="btn btn-secondary waves-effect"><i
-                                                class="mdi mdi-repeat"></i> Reset</button>
-                                    </div> -->
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Nama Usaha
                                                     <span class="text-danger">*</span></label>
-                                                    <select name="usaha_id" class="form-select" id="">
-                                                        @foreach($usahaRows as $r)
-                                                        <option value="{{$r->usaha_id }}">{{$r->nama_usaha}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                <select name="usaha_id" class="form-select" id="">
+                                                    @foreach ($usahaRows as $r)
+                                                        <option value="{{ $r->usaha_id }}">{{ $r->nama_usaha }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="userName" class="form-label">Nominal</label>
-                                                <span class="text-danger">*</span>
-                                                <input type="number" name="nominal" parsley-trigger="change" required
-                                                placeholder="Masukkan Nominal Penghasilan" class="form-control" id="userName" />
+                                                <label for="" class="form-label">Pajak</label>
+                                                <input type="number" name="pajak" parsley-trigger="change" placeholder=""
+                                                    class="form-control" id="pajak" readonly />
+                                                <p class="text-muted">*Pajak adalah 10% dari total omset atau
+                                                    penghasilan bersih</p>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Pajak</label>
-                                                <input type="number"  name="pajak" parsley-trigger="change"
-                                                placeholder="" class="form-control" id=""  />
+                                                <label for="userName" class="form-label">Nominal</label>
+                                                <span class="text-danger">*</span>
+                                                <input type="number" name="nominal" parsley-trigger="change" required
+                                                    placeholder="Masukkan Nominal Penghasilan" class="form-control"
+                                                    id="nominal" />
                                             </div>
                                         </div>
                                     </div>
@@ -83,6 +73,13 @@
     </div> <!-- content -->
 
     <script>
-        $('form-valid-parsley').parsley();
+        $(document).ready(function() {
+            // $('form-valid-parsley').parsley();
+            $('#nominal').on('keyup', function() {
+                let nominal = $('#nominal').val();
+                let pajak = nominal * 10 / 100;
+                $('#pajak').val(pajak);
+            });
+        });
     </script>
 @endsection

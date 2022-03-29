@@ -36,6 +36,19 @@
                                     Olah data omset untuk melihat harga pajak.
                                 </p>
 
+                                @canany(['owner'])
+                                    <div class="row">
+                                        <div class="col-sm-6 mb-2">
+                                            <span>Filter :</span> <br>
+                                            <select id="filterUsaha">
+                                                <option value="semua">Semua</option>
+                                                @foreach ($usahaRows as $r)
+                                                    <option value="{{ $r->usaha_id }}">{{ $r->nama_usaha }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                @endcanany
                                 <div class="table-responsive">
                                     <table class="table mb-0">
                                         <thead class="table-dark">
@@ -44,15 +57,14 @@
                                                 <th>Nama Usaha</th>
                                                 <th>Nominal</th>
                                                 <th>Pajak</th>
-                                                <th>Dibuat</th>
-                                                <th>Terakhir Diubah</th>
+                                                <th>Status</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @if (count($omsetRows) < 1)
                                                 <tr>
-                                                    <td colspan="4" class="text-center">Data belum ada, silahkan tambah
+                                                    <td colspan="7" class="text-center">Data belum ada, silahkan tambah
                                                         data</td>
                                                 </tr>
                                             @else
@@ -60,13 +72,26 @@
                                                     <tr>
                                                         <th scope="row">{{ $key = $key + 1 }}</th>
                                                         <td>{{ $r->nama_usaha }}</td>
-                                                        <td>{{ $r->nominal}}</td>
-                                                        <td>{{ $r->pajak}}</td>
-                                                        <td>{{ $r->created_at }}</td>
-                                                        <td>{{ $r->updated_at }}</td>
+                                                        <td class="text-end">Rp.{{ number_format($r->nominal) }}
+                                                        </td>
+                                                        <td class="text-end">Rp.{{ number_format($r->pajak) }}</td>
+                                                        <td>
+                                                            <span class="badge bg-secondary">
+                                                                {{ $r->created_at }}
+                                                            </span>
+                                                            <br>
+                                                            @if ($r->transaksi_id != null)
+                                                                <span class="badge bg-success">
+                                                                    Terbayar
+                                                                </span>
+                                                            @else
+                                                                <span class="badge bg-danger">
+                                                                    Belum Terbayar
+                                                                </span>
+                                                            @endif
+                                                        </td>
                                                         <td class="text-center">
-                                                            <form action="/admin/omset/{{ $r->omset_id }}"
-                                                                method="post">
+                                                            <form action="/admin/omset/{{ $r->omset_id }}" method="post">
                                                                 <a href="/admin/omset/{{ $r->omset_id }}/edit"
                                                                     class="btn btn-sm btn-warning">
                                                                     <i class="mdi mdi-pencil"></i>
@@ -102,4 +127,15 @@
             </div> <!-- container-fluid -->
 
         </div> <!-- content -->
+        <script>
+            $('document').ready(function() {
+                $('#filterUsaha').on('change', function() {
+                    if ($('#filterUsaha').val() == 'semua') {
+                        window.location.href = '/admin/omset/';
+                    } else {
+                        window.location.href = '/admin/omset/' + $('#filterUsaha').val();
+                    }
+                });
+            });
+        </script>
     @endsection

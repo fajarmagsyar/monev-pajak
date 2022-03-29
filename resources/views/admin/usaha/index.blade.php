@@ -27,10 +27,13 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="float-end">
-                                    <a class="btn btn-sm btn-outline-success" href="/admin/usaha/create">+
-                                        TAMBAH</a>
-                                </div>
+                                @canany(['owner'])
+                                    <div class="float-end">
+                                        <a class="btn btn-sm btn-outline-success" href="/admin/usaha/create">+
+                                            TAMBAH</a>
+                                    </div>
+                                @endcanany
+
                                 <h4 class="mt-0 header-title">Data Usaha</h4>
                                 <p class="text-muted font-14 mb-3">
                                     Olah data usaha Anda.
@@ -41,61 +44,84 @@
                                         <thead class="table-dark">
                                             <tr>
                                                 <th>#</th>
-                                                <th>Jenis Usaha</th>
+                                                @canany(['admin', 'juruPajak'])
+                                                    <th>Pemilik</th>
+                                                @endcanany
                                                 <th>Nama Usaha</th>
-                                                <th>NPWP Usaha</th>
-                                                <th>Surat Ijin Usaha</th>
-                                                <th>Surat Ijin BPOM</th>
-                                                <th>Sertifikat Halal</th>
-                                                <th>Dibuat</th>
-                                                <th>Terakhir Diubah</th>
+                                                <th>Dokumen</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @if (count($UsahaRows) < 1)
                                                 <tr>
-                                                    <td colspan="4" class="text-center">Data belum ada, silahkan tambah
+                                                    <td colspan="10" class="text-center">Data belum ada, silahkan tambah
                                                         data</td>
                                                 </tr>
                                             @else
                                                 @foreach ($UsahaRows as $key => $r)
                                                     <tr>
-                                                        <th scope="row">{{ $key = $key + 1 }}</th>
-                                                        <td>{{ $r->nama_jenis_usaha}}</td>
-                                                        <td>{{ $r->nama_usaha }}</td>
-                                                        <td>{{ $r->npwp_usaha }}</td>
-                                                        <td scope="row" class="text-center">
+                                                        <th class="align-middle" scope="row">{{ $key = $key + 1 }}</th>
+                                                        @canany(['admin', 'juruPajak'])
+                                                            <td class="align-middle">{{ $r->nama }}</td>
+                                                        @endcanany
+                                                        <td class="align-middle">{{ $r->nama_usaha }}
+                                                            <br>
+                                                            <span class="badge bg-primary">
+                                                                Jenis Usaha: {{ $r->nama_jenis_usaha }}
+                                                            </span>
+                                                            <br>
+                                                            <span class="badge bg-primary">
+                                                                NPWP: {{ $r->npwp }}
+                                                            </span>
+                                                            <br>
+                                                            <span class="badge bg-secondary">
+                                                                Diinput: {{ $r->updated_at }}
+                                                            </span>
+                                                        </td>
+                                                        <td>
                                                             <a href="{{ $r->surat_ijin_usaha }}">
-                                                            <i class="mdi mdi-file-pdf-outline" style="font-size: 25px;"></i>
-                                                            </a>
-                                                        </td>
-                                                        <td scope="row" class="text-center">
+                                                                <i class="mdi mdi-file-pdf-outline"
+                                                                    style="font-size: 25px;"></i> Ijin Usaha
+                                                            </a><br>
                                                             <a href="{{ $r->surat_ijin_bpom }}">
-                                                            <i class="mdi mdi-file-pdf-outline" style="font-size: 25px;"></i>
-                                                            </a>
+                                                                <i class="mdi mdi-file-pdf-outline"
+                                                                    style="font-size: 25px;"></i> BPOM
+                                                            </a><br>
+                                                            @if ($r->sertifikat_halal != null)
+                                                                <a href="{{ $r->sertifikat_halal }}">
+                                                                    <i class="mdi mdi-file-pdf-outline"
+                                                                        style="font-size: 25px;"></i> Sert. Halal
+                                                                </a>
+                                                            @endif
                                                         </td>
-                                                        <td scope="row" class="text-center">
-                                                            <a href="{{ $r->sertifikat_halal }}">
-                                                            <i class="mdi mdi-file-pdf-outline" style="font-size: 25px;"></i>
-                                                            </a>
                                                         </td>
-                                                        <td>{{ $r->created_at }}</td>
-                                                        <td>{{ $r->updated_at }}</td>
-                                                        <td class="text-center">
-                                                            <form action="/admin/usaha/{{ $r->usaha_id }}"
-                                                                method="post">
+                                                        <td class="text-center align-middle">
+                                                            <form action="/admin/usaha/{{ $r->usaha_id }}" method="post">
                                                                 <a href="/admin/usaha/{{ $r->usaha_id }}/edit"
-                                                                    class="btn btn-sm btn-warning">
+                                                                    class="btn btn-sm btn-warning mb-2">
                                                                     <i class="mdi mdi-pencil"></i>
                                                                 </a>
                                                                 @method('DELETE')
                                                                 @csrf
                                                                 <button type="submit"
                                                                     href="/admin/usaha/{{ $r->usaha_id }}"
-                                                                    class="btn btn-sm btn-danger" class="d-inline">
+                                                                    class="btn btn-sm btn-danger mb-2"
+                                                                    class="d-inline">
                                                                     <i class="mdi mdi-delete"></i>
                                                                 </button>
+                                                                <br \>
+                                                                <a href="/admin/omset/{{ $r->usaha_id }}"
+                                                                    class="btn btn-sm btn-info mb-2">
+                                                                    <i class="mdi mdi-chart-areaspline"></i> Omset
+                                                                </a>
+                                                                <br>
+                                                                @canany(['juruPajak'])
+                                                                    <a href="/admin/riwayat-pajak/tambah/{{ $r->usaha_id }}"
+                                                                        class="btn btn-sm btn-primary">
+                                                                        <i class="mdi mdi-cash"></i>+ Pajak
+                                                                    </a>
+                                                                @endcanany
                                                             </form>
                                                         </td>
                                                     </tr>
