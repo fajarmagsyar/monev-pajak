@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Omset;
 use Illuminate\Http\Request;
 use App\Models\Usaha;
+use PDF;
 
 class OmsetController extends Controller
 {
@@ -116,5 +117,14 @@ class OmsetController extends Controller
 
         return redirect('/admin/omset')->with('success', 'Data Berhasil Dihapus!');
     }
+     public function cetakPDFOmset()
+    {
+      
+        $rowsomset = Omset::join('usaha','usaha.usaha_id', '=', 'omset.usaha_id')->orderBy('usaha.created_at', 'DESC')->get();
+        $pdf = PDF::loadview('template.pdf.omset', ['rowsomset' => $rowsomset]);
+        // return $pdf->download('riwayat-pendidikan-' . auth()->user()->nip . '-' . time() . '.pdf');
+        return $pdf->stream('-omset-' . '-' . time() . '.pdf', array('Attachment' => 0));
+    }
+
 
 }

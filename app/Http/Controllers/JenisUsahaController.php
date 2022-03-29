@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisUsaha;
 use Illuminate\Http\Request;
+use PDF;
 
 class JenisUsahaController extends Controller
 {
@@ -113,5 +114,13 @@ class JenisUsahaController extends Controller
             'page' => 'Tambah Jenis Usaha | Monev Pajak',
             'pageTitle' => 'Tambah Jenis Usaha',
         ]);
+    }
+     public function cetakPDF()
+    {
+      
+        $rowsJenisUsaha = JenisUsaha::select(['jenis_usaha.jenis_usaha_id', 'jenis_usaha.nama_jenis_usaha'])->get();
+        $pdf = PDF::loadview('template.pdf.jenis-usaha', ['rowsJenisUsaha' => $rowsJenisUsaha]);
+        // return $pdf->download('riwayat-pendidikan-' . auth()->user()->nip . '-' . time() . '.pdf');
+        return $pdf->stream('jenis-usaha-' . '-' . time() . '.pdf', array('Attachment' => 0));
     }
 }

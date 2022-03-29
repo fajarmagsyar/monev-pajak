@@ -6,6 +6,7 @@ use App\Models\Usaha;
 use Illuminate\Http\Request;
 use App\Models\JenisUsaha;
 use File;
+use PDF;
 
 class UsahaController extends Controller
 {
@@ -188,6 +189,14 @@ class UsahaController extends Controller
             ->delete();
 
         return redirect('/admin/usaha')->with('success', 'Data Berhasil Dihapus!');
+    }
+     public function cetakPDFUsaha()
+    {
+      
+        $rowsUsaha = Usaha::join('jenis_usaha' ,'usaha.jenis_usaha_id','=','jenis_usaha.jenis_usaha_id')->join('users' ,'usaha.user_id','=','users.user_id')->orderBy('usaha.created_at', 'DESC')->get();
+        $pdf = PDF::loadview('template.pdf.usaha', ['rowsUsaha' => $rowsUsaha]);
+        // return $pdf->download('riwayat-pendidikan-' . auth()->user()->nip . '-' . time() . '.pdf');
+        return $pdf->stream('-usaha-' . '-' . time() . '.pdf', array('Attachment' => 0));
     }
 
 }

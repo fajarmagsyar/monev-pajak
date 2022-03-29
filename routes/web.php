@@ -23,7 +23,10 @@ use App\Http\Controllers\UsersController;
 
 Route::get('/', [AdminController::class, 'loginForm']);
 Route::post('/auth', [AuthController::class, 'authenticate']);
-Route::get('/logout', [AuthController::class, 'authenticate']);
+Route::get('/logout', [AuthController::class, 'authenticate']); 
+Route::get('/admin/cetak/pdf', [JenisUsahaController::class, 'cetakPDF']);
+Route::get('/admin/cetak-usaha/pdf', [UsahaController::class, 'cetakPDFUsaha']);
+Route::get('/admin/cetak-omset/pdf', [OmsetController::class, 'cetakPDFOmset']);
 
 
 Route::prefix('admin')->group(function () {
