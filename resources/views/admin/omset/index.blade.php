@@ -58,7 +58,9 @@
                                                 <th>Nominal</th>
                                                 <th>Pajak</th>
                                                 <th>Status</th>
-                                                <th></th>
+                                                @canany(['owner'])
+                                                    <th></th>
+                                                @endcanany
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -90,21 +92,27 @@
                                                                 </span>
                                                             @endif
                                                         </td>
-                                                        <td class="text-center">
-                                                            <form action="/admin/omset/{{ $r->omset_id }}" method="post">
-                                                                <a href="/admin/omset/{{ $r->omset_id }}/edit"
-                                                                    class="btn btn-sm btn-warning">
-                                                                    <i class="mdi mdi-pencil"></i>
-                                                                </a>
-                                                                @method('DELETE')
-                                                                @csrf
-                                                                <button type="submit"
-                                                                    href="/admin/omset/{{ $r->omset_id }}"
-                                                                    class="btn btn-sm btn-danger" class="d-inline">
-                                                                    <i class="mdi mdi-delete"></i>
-                                                                </button>
-                                                            </form>
-                                                        </td>
+                                                        @canany(['owner'])
+                                                            <td class="text-center">
+                                                                @if ($r->transaksi_id == null)
+                                                                    <form action="/admin/omset/{{ $r->omset_id }}"
+                                                                        method="post">
+                                                                        <a href="/admin/omset/{{ $r->omset_id }}/edit"
+                                                                            class="btn btn-sm btn-warning">
+                                                                            <i class="mdi mdi-pencil"></i>
+                                                                        </a>
+                                                                        @method('DELETE')
+                                                                        @csrf
+                                                                        <button type="submit"
+                                                                            href="/admin/omset/{{ $r->omset_id }}"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            class="d-inline">
+                                                                            <i class="mdi mdi-delete"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
+                                                            </td>
+                                                        @endcanany
                                                     </tr>
                                                 @endforeach
                                             @endif

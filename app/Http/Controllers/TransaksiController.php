@@ -5,22 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Omset;
 use App\Models\Transaksi;
 use App\Models\Usaha;
+use App\Models\Users;
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
 {
-    public function riwayatPajak()
+    public function riwayatPajak(Users $users)
     {
         // dd(Transaksi::join('omset', 'omset.omset_id', '=', 'transaksi.transaksi_id')->get());
+
+        if ($users->hasRole('Owner')) {
+            $transaksi = Transaksi::select(['transaksi.*', 'usaha.nama_usaha', 'usaha.usaha_id', 'usaha.user_id'])->join('omset', 'omset.transaksi_id', '=', 'transaksi.transaksi_id')->join('usaha', 'usaha.usaha_id', '=', 'omset.usaha_id')->where('usaha.user_id', auth()->user()->user_id)->groupBy('transaksi.transaksi_id')->groupBy('usaha.usaha_id')->paginate(10);
+        } else {
+            $transaksi = Transaksi::select(['transaksi.*', 'usaha.nama_usaha', 'usaha.usaha_id'])->join('omset', 'omset.transaksi_id', '=', 'transaksi.transaksi_id')->join('usaha', 'usaha.usaha_id', '=', 'omset.usaha_id')->groupBy('transaksi.transaksi_id')->groupBy('usaha.usaha_id')->paginate(10);
+        }
         return view('admin.riwayat-pajak.index', [
             'page' => 'Riwayat Pajak | Monev Pajak',
             'pageTitle' => 'Riwayat Pajak',
-            'transaksiRows' => Transaksi::select(['transaksi.*', 'usaha.nama_usaha', 'usaha.usaha_id'])
-                ->join('omset', 'omset.transaksi_id', '=', 'transaksi.transaksi_id')
-                ->join('usaha', 'usaha.usaha_id', '=', 'omset.usaha_id')
-                ->groupBy('transaksi.transaksi_id')
-                ->groupBy('usaha.usaha_id')
-                ->paginate(10),
+            'transaksiRows' => $transaksi,
         ]);
     }
     public function paidPajakForm($id)
