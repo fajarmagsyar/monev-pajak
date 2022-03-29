@@ -61,7 +61,9 @@
                                                 <th>Nominal</th>
                                                 <th>Pajak</th>
                                                 <th>Status</th>
+                                                @canany(['owner'])
                                                 <th></th>
+                                                @endcanany
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -92,7 +94,9 @@
                                                         </span>
                                                         @endif
                                                     </td>
+                                                    @canany(['owner'])
                                                     <td class="text-center">
+                                                        @if ($r->transaksi_id == null)
                                                         <form action="/admin/omset/{{ $r->omset_id }}" method="post">
                                                             <a href="/admin/omset/{{ $r->omset_id }}/edit"
                                                                 class="btn btn-sm btn-warning">
@@ -105,7 +109,9 @@
                                                                 <i class="mdi mdi-delete"></i>
                                                             </button>
                                                         </form>
+                                                        @endif
                                                     </td>
+                                                    @endcanany
                                                 </tr>
                                                 @endforeach
                                                 @endif
@@ -191,25 +197,24 @@
                                 </div>
 
 
-                                <<<<<<< HEAD </div>
-                                    <!-- end row -->
+                            </div>
+                            <!-- end row -->
 
-                            </div> <!-- container-fluid -->
+                        </div> <!-- container-fluid -->
 
-                        </div> <!-- content -->
-                        @endsection
-                        =======
                     </div> <!-- content -->
-                    <script>
-                    $('document').ready(function() {
-                        $('#filterUsaha').on('change', function() {
-                            if ($('#filterUsaha').val() == 'semua') {
-                                window.location.href = '/admin/omset/';
-                            } else {
-                                window.location.href = '/admin/omset/' + $('#filterUsaha').val();
-                            }
-                        });
-                    });
-                    </script>
                     @endsection
-                    >>>>>>> 7573bd4fd04a80b69755fe106799cbbe37ae7943
+
+                </div> <!-- content -->
+                <script>
+                $('document').ready(function() {
+                    $('#filterUsaha').on('change', function() {
+                        if ($('#filterUsaha').val() == 'semua') {
+                            window.location.href = '/admin/omset/';
+                        } else {
+                            window.location.href = '/admin/omset/' + $('#filterUsaha').val();
+                        }
+                    });
+                });
+                </script>
+                @endsection
