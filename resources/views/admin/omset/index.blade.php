@@ -22,84 +22,194 @@
         <!-- Start Content-->
         <div class="container-fluid">
 
+
             <div class="row">
 
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="float-end">
-                                <a class="btn btn-sm btn-outline-success" href="/admin/omset/tambah/data">+
-                                    TAMBAH</a>
-                                <a href="/admin/cetak-omset/pdf" class="btn btn-sm btn-outline-info"><i
-                                        class="mdi mdi-printer"></i> Cetak
-                                    Laporan</a>
-                            </div>
-                            <h4 class="mt-0 header-title">Data Omset</h4>
-                            <p class="text-muted font-14 mb-3">
-                                Olah data omset untuk melihat harga pajak.
-                            </p>
+                <div class="row">
 
-                            <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Nama Usaha</th>
-                                            <th>Nominal</th>
-                                            <th>Pajak</th>
-                                            <th>Dibuat</th>
-                                            <th>Terakhir Diubah</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if (count($omsetRows) < 1) <tr>
-                                            <td colspan="4" class="text-center">Data belum ada, silahkan tambah
-                                                data</td>
-                                            </tr>
-                                            @else
-                                            @foreach ($omsetRows as $key => $r)
-                                            <tr>
-                                                <th scope="row">{{ $key = $key + 1 }}</th>
-                                                <td>{{ $r->nama_usaha }}</td>
-                                                <td>{{ $r->nominal}}</td>
-                                                <td>{{ $r->pajak}}</td>
-                                                <td>{{ $r->created_at }}</td>
-                                                <td>{{ $r->updated_at }}</td>
-                                                <td class="text-center">
-                                                    <form action="/admin/omset/{{ $r->omset_id }}" method="post">
-                                                        <a href="/admin/omset/{{ $r->omset_id }}/edit"
-                                                            class="btn btn-sm btn-warning">
-                                                            <i class="mdi mdi-pencil"></i>
-                                                        </a>
-                                                        @method('DELETE')
-                                                        @csrf
-                                                        <button type="submit" href="/admin/omset/{{ $r->omset_id }}"
-                                                            class="btn btn-sm btn-danger" class="d-inline">
-                                                            <i class="mdi mdi-delete"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="float-end">
+                                    <a class="btn btn-sm btn-outline-success" href="/admin/omset/tambah/data">+
+                                        TAMBAH</a>
+                                </div>
+                                <h4 class="mt-0 header-title">Data Omset</h4>
+                                <p class="text-muted font-14 mb-3">
+                                    Olah data omset untuk melihat harga pajak.
+                                </p>
+
+                                @canany(['owner'])
+                                <div class="row">
+                                    <div class="col-sm-6 mb-2">
+                                        <span>Filter :</span> <br>
+                                        <select id="filterUsaha">
+                                            <option value="semua">Semua</option>
+                                            @foreach ($usahaRows as $r)
+                                            <option value="{{ $r->usaha_id }}">{{ $r->nama_usaha }}</option>
                                             @endforeach
-                                            @endif
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </select>
+                                    </div>
+                                </div>
+                                @endcanany
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama Usaha</th>
+                                                <th>Nominal</th>
+                                                <th>Pajak</th>
+                                                <th>Status</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (count($omsetRows) < 1) <tr>
+                                                <td colspan="7" class="text-center">Data belum ada, silahkan tambah
+                                                    data</td>
+                                                </tr>
+                                                @else
+                                                @foreach ($omsetRows as $key => $r)
+                                                <tr>
+                                                    <th scope="row">{{ $key = $key + 1 }}</th>
+                                                    <td>{{ $r->nama_usaha }}</td>
+                                                    <td class="text-end">Rp.{{ number_format($r->nominal) }}
+                                                    </td>
+                                                    <td class="text-end">Rp.{{ number_format($r->pajak) }}</td>
+                                                    <td>
+                                                        <span class="badge bg-secondary">
+                                                            {{ $r->created_at }}
+                                                        </span>
+                                                        <br>
+                                                        @if ($r->transaksi_id != null)
+                                                        <span class="badge bg-success">
+                                                            Terbayar
+                                                        </span>
+                                                        @else
+                                                        <span class="badge bg-danger">
+                                                            Belum Terbayar
+                                                        </span>
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <form action="/admin/omset/{{ $r->omset_id }}" method="post">
+                                                            <a href="/admin/omset/{{ $r->omset_id }}/edit"
+                                                                class="btn btn-sm btn-warning">
+                                                                <i class="mdi mdi-pencil"></i>
+                                                            </a>
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button type="submit" href="/admin/omset/{{ $r->omset_id }}"
+                                                                class="btn btn-sm btn-danger" class="d-inline">
+                                                                <i class="mdi mdi-delete"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                @endif
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                        </div>
-                        <center>
-                            {{ $omsetRows->links() }}
-                        </center>
-                    </div>
 
-                </div>
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="float-end">
+                                                <a class="btn btn-sm btn-outline-success"
+                                                    href="/admin/omset/tambah/data">+
+                                                    TAMBAH</a>
+                                                <a href="/admin/cetak-omset/pdf" class="btn btn-sm btn-outline-info"><i
+                                                        class="mdi mdi-printer"></i> Cetak
+                                                    Laporan</a>
+                                            </div>
+                                            <h4 class="mt-0 header-title">Data Omset</h4>
+                                            <p class="text-muted font-14 mb-3">
+                                                Olah data omset untuk melihat harga pajak.
+                                            </p>
+
+                                            <div class="table-responsive">
+                                                <table class="table mb-0">
+                                                    <thead class="table-dark">
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Nama Usaha</th>
+                                                            <th>Nominal</th>
+                                                            <th>Pajak</th>
+                                                            <th>Dibuat</th>
+                                                            <th>Terakhir Diubah</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (count($omsetRows) < 1) <tr>
+                                                            <td colspan="4" class="text-center">Data belum ada, silahkan
+                                                                tambah
+                                                                data</td>
+                                                            </tr>
+                                                            @else
+                                                            @foreach ($omsetRows as $key => $r)
+                                                            <tr>
+                                                                <th scope="row">{{ $key = $key + 1 }}</th>
+                                                                <td>{{ $r->nama_usaha }}</td>
+                                                                <td>{{ $r->nominal}}</td>
+                                                                <td>{{ $r->pajak}}</td>
+                                                                <td>{{ $r->created_at }}</td>
+                                                                <td>{{ $r->updated_at }}</td>
+                                                                <td class="text-center">
+                                                                    <form action="/admin/omset/{{ $r->omset_id }}"
+                                                                        method="post">
+                                                                        <a href="/admin/omset/{{ $r->omset_id }}/edit"
+                                                                            class="btn btn-sm btn-warning">
+                                                                            <i class="mdi mdi-pencil"></i>
+                                                                        </a>
+                                                                        @method('DELETE')
+                                                                        @csrf
+                                                                        <button type="submit"
+                                                                            href="/admin/omset/{{ $r->omset_id }}"
+                                                                            class="btn btn-sm btn-danger"
+                                                                            class="d-inline">
+                                                                            <i class="mdi mdi-delete"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                            @endforeach
+                                                            @endif
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <center>
+                                            {{ $omsetRows->links() }}
+                                        </center>
+                                    </div>
+
+                                </div>
 
 
-            </div>
-            <!-- end row -->
+                                <<<<<<< HEAD </div>
+                                    <!-- end row -->
 
-        </div> <!-- container-fluid -->
+                            </div> <!-- container-fluid -->
 
-    </div> <!-- content -->
-    @endsection
+                        </div> <!-- content -->
+                        @endsection
+                        =======
+                    </div> <!-- content -->
+                    <script>
+                    $('document').ready(function() {
+                        $('#filterUsaha').on('change', function() {
+                            if ($('#filterUsaha').val() == 'semua') {
+                                window.location.href = '/admin/omset/';
+                            } else {
+                                window.location.href = '/admin/omset/' + $('#filterUsaha').val();
+                            }
+                        });
+                    });
+                    </script>
+                    @endsection
+                    >>>>>>> 7573bd4fd04a80b69755fe106799cbbe37ae7943

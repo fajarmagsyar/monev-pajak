@@ -17,19 +17,36 @@
                                     Pastikan data yang telah anda input benar dan sesuai dengan format yang tertera.
                                 </p>
 
-                                <form action="/admin/usaha" class="parsley-examples" id="form-valid-parsley"
-                                    method="post" enctype="multipart/form-data">
+                                <form action="/admin/usaha" class="parsley-examples" id="form-valid-parsley" method="post"
+                                    enctype="multipart/form-data">
                                     @method('post')
                                     @csrf
-                                    <div class="mb-3">
-                                        <label for="userName" class="form-label">Jenis Usaha
-                                            <span class="text-danger">*</span></label>
-                                        <select name="jenis_usaha_id" class="form-select" id="">
-                                        <option value="">Pilih Jenis Usaha</option>
-                                            @foreach($JenisUsaha as $r)
-                                            <option value="{{$r->jenis_usaha_id}}">{{$r->nama_jenis_usaha}}</option>
-                                            @endforeach
-                                        </select>
+                                    <input type="hidden" value="{{ auth()->user()->user_id }}" name="user_id">
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label for="userName" class="form-label">Jenis Usaha
+                                                    <span class="text-danger">*</span></label>
+                                                <select name="jenis_usaha_id" class="form-select" id="">
+                                                    <option value="">Pilih Jenis Usaha</option>
+                                                    @foreach ($JenisUsaha as $r)
+                                                        <option value="{{ $r->jenis_usaha_id }}">
+                                                            {{ $r->nama_jenis_usaha }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <label for="userName" class="form-label">NPWP Usaha
+                                                    <span class="text-danger">*</span></label>
+                                                <input type="text" name="npwp_usaha" parsley-trigger="change" required
+                                                    placeholder="Masukkan npwp usaha" class="form-control"
+                                                    data-parsley-length="[16,16]" id="userName" />
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Nama Usaha
@@ -37,34 +54,33 @@
                                         <input type="text" name="nama_usaha" parsley-trigger="change" required
                                             placeholder="Masukkan nama usaha" class="form-control" id="userName" />
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="userName" class="form-label">NPWP Usaha
-                                            <span class="text-danger">*</span></label>
-                                        <input type="text" name="npwp_usaha" parsley-trigger="change" required
-                                            placeholder="Masukkan npwp usaha" class="form-control" id="userName" />
-                                    </div>
-                                    <label for="surat_ijin_usaha" class="form-label">Surat Ijin Usaha (Format: PDF Maksimal 1Mb) 
+
+                                    <label for="surat_ijin_usaha" class="form-label">Surat Ijin Usaha (Format: PDF
+                                        Maksimal 1Mb)
                                         <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="file" name="surat_ijin_usaha" required
-                                            class="form-control" value="{{old('surat_ijin_usaha')}}"
-                                            id="surat_ijin_usaha" accept=".pdf" name="surat_ijin_usaha">
+                                        <input type="file" name="surat_ijin_usaha" required class="form-control"
+                                            value="{{ old('surat_ijin_usaha') }}" id="surat_ijin_usaha" accept=".pdf"
+                                            name="surat_ijin_usaha">
                                         <label class="input-group-text" for="surat_ijin_usaha">Upload</label>
                                     </div>
-                                    <label for="surat_ijin_bpom" class="form-label">Surat Ijin BPOM (Format: PDF Maksimal 1Mb) 
+
+                                    <label for="surat_ijin_bpom" class="form-label">Surat Ijin BPOM (Format: PDF
+                                        Maksimal 1Mb)
                                         <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="file" name="surat_ijin_bpom" required
-                                            class="form-control" value="{{old('surat_ijin_bpom')}}"
-                                            id="surat_ijin_bpom" accept=".pdf" name="surat_ijin_bpom">
+                                        <input type="file" name="surat_ijin_bpom" required class="form-control"
+                                            value="{{ old('surat_ijin_bpom') }}" id="surat_ijin_bpom" accept=".pdf"
+                                            name="surat_ijin_bpom">
                                         <label class="input-group-text" for="surat_ijin_bpom">Upload</label>
                                     </div>
-                                    <label for="sertifikat_halal" class="form-label">Sertifikat Halal (Format: PDF Maksimal 1Mb) 
-                                        <span class="text-danger">*</span></label>
+
+                                    <label for="sertifikat_halal" class="form-label">Sertifikat Halal (Format: PDF
+                                        Maksimal 1Mb)</label>
                                     <div class="input-group mb-3">
-                                        <input type="file" name="sertifikat_halal" required
-                                            class="form-control" value="{{old('sertifikat_halal')}}"
-                                            id="sertifikat_halal" accept=".pdf" name="sertifikat_halal">
+                                        <input type="file" name="sertifikat_halal" class="form-control"
+                                            value="{{ old('sertifikat_halal') }}" id="sertifikat_halal" accept=".pdf"
+                                            name="sertifikat_halal">
                                         <label class="input-group-text" for="sertifikat_halal">Upload</label>
                                     </div>
                                     <div class="text-end">
@@ -73,6 +89,7 @@
                                         <button type="reset" class="btn btn-secondary waves-effect"><i
                                                 class="mdi mdi-repeat"></i> Reset</button>
                                     </div>
+
                                 </form>
                             </div>
                         </div> <!-- end card -->
@@ -91,6 +108,15 @@
     </div> <!-- content -->
 
     <script>
-        $('form-valid-parsley').parsley();
+        $(document).ready(function() {
+            $(".parsley-examples").parsley()
+        }), $(function() {
+            $("#demo-form").parsley().on("field:validated", function() {
+                var e = 0 === $(".parsley-error").length;
+                $(".alert-info").toggleClass("d-none", !e), $(".alert-warning").toggleClass("d-none", e)
+            }).on("form:submit", function() {
+                return !1
+            })
+        });
     </script>
 @endsection

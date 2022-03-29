@@ -17,7 +17,7 @@ class Transaksi extends Migration
         DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
         Schema::create('transaksi', function (Blueprint $table) {
             $table->uuid('transaksi_id')->primary();
-            $table->uuid('omset_id')->nullable();
+            $table->string('total_pajak')->nullable();
             $table->timestamps();
         });
         DB::statement('ALTER TABLE transaksi ALTER COLUMN transaksi_id SET DEFAULT uuid_generate_v4();');

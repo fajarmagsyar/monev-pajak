@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usaha;
 use Illuminate\Http\Request;
 use App\Models\JenisUsaha;
+use App\Models\Users;
 use File;
 use PDF;
 
@@ -15,13 +16,17 @@ class UsahaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Users $users)
     {
+        if ($users->hasRole('Owner')) {
+            $usaha = Usaha::join('users', 'users.user_id', '=', 'usaha.user_id')->join('jenis_usaha', 'usaha.jenis_usaha_id', '=', 'jenis_usaha.jenis_usaha_id')->where('users.user_id', '=', auth()->user()->user_id)->orderBy('usaha.created_at', 'DESC')->paginate(10);
+        } else {
+            $usaha = Usaha::join('users', 'users.user_id', '=', 'usaha.user_id')->join('jenis_usaha', 'usaha.jenis_usaha_id', '=', 'jenis_usaha.jenis_usaha_id')->orderBy('usaha.created_at', 'DESC')->paginate(10);
+        }
         return view('admin.usaha.index', [
             'page' => 'Usaha | Monev Pajak',
             'pageTitle' => 'Usaha',
-            'UsahaRows' => Usaha::join('jenis_usaha' ,'usaha.jenis_usaha_id','=','jenis_usaha.jenis_usaha_id')->orderBy('usaha.created_at', 'DESC')->paginate(10),
-
+            'UsahaRows' => $usaha,
         ]);
     }
 
@@ -31,7 +36,7 @@ class UsahaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //  Tambah Data
+    //  Tambah Data
     public function create()
     {
         return view('admin.usaha.create', [
@@ -74,6 +79,7 @@ class UsahaController extends Controller
 
         $data = [
             'jenis_usaha_id' => $request->input('jenis_usaha_id'),
+            'user_id' => $request->input('user_id'),
             'nama_usaha' => $request->input('nama_usaha'),
             'npwp_usaha' => $request->input('npwp_usaha'),
             'surat_ijin_usaha' => $name_ijin_usaha,
@@ -86,7 +92,7 @@ class UsahaController extends Controller
         return redirect('/admin/usaha')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -123,7 +129,7 @@ class UsahaController extends Controller
         $usaha = Usaha::where('usaha_id', $request->input('usaha_id'))->first();
 
         // dd($ijin_usaha);
-        
+
         $path_ijin_usaha = $usaha['surat_ijin_usaha'];
         if ($request->file('surat_ijin_usaha')) {
             File::delete(public_path($path_ijin_usaha));
@@ -190,6 +196,7 @@ class UsahaController extends Controller
 
         return redirect('/admin/usaha')->with('success', 'Data Berhasil Dihapus!');
     }
+
      public function cetakPDFUsaha()
     {
       

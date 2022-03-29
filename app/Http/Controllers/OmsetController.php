@@ -14,25 +14,29 @@ class OmsetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index()
+    {
         return view('admin.omset.index', [
             'page' => 'Omset | Monev Pajak',
             'pageTitle' => 'Omset',
-            'omsetRows' => Omset::join('usaha','usaha.usaha_id', '=', 'omset.usaha_id')->orderBy('usaha.created_at', 'DESC')->paginate(10),
+            'omsetRows' => Omset::join('usaha', 'usaha.usaha_id', '=', 'omset.usaha_id')->orderBy('usaha.created_at', 'DESC')->paginate(10),
+            'usahaRows' => Usaha::where('user_id', auth()->user()->user_id)->get(),
+
         ]);
     }
 
-        /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
+
         return view('admin.omset.create', [
             'page' => 'Tambah Omset | Monev Pajak',
             'pageTitle' => 'Tambah Omset',
-            'usahaRows' => Usaha::get(),
+            'usahaRows' => Usaha::where('user_id', auth()->user()->user_id)->get(),
         ]);
     }
 
@@ -49,7 +53,7 @@ class OmsetController extends Controller
             'nominal' => $request->input('nominal'),
             'pajak' => $request->input('pajak'),
         ];
-      
+
 
         Omset::create($data);
 
@@ -64,10 +68,20 @@ class OmsetController extends Controller
      */
     public function show($id)
     {
-        //
+
+        return view('admin.omset.index', [
+            'page' => 'Omset | Monev Pajak',
+            'pageTitle' => 'Omset',
+            'omsetRows' => Omset::join('usaha', 'usaha.usaha_id', '=', 'omset.usaha_id')
+                ->where('usaha.usaha_id', $id)
+                ->orderBy('usaha.created_at', 'DESC')
+                ->paginate(10),
+            'usahaRows' => Usaha::get()
+                ->where('user_id', auth()->user()->user_id),
+        ]);
     }
 
-      /**
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -79,7 +93,7 @@ class OmsetController extends Controller
             'page' => 'Edit Omset | Monev Pajak',
             'pageTitle' => 'Edit Omset',
             'omsetRow' => Omset::where('omset_id', $id)->first(),
-            'usahaRows' => Usaha::get(),
+            'usahaRows' => Usaha::get()->where('user_id', auth()->user()->user_id),
         ]);
     }
 
@@ -102,9 +116,9 @@ class OmsetController extends Controller
             ->update($data);
 
         return redirect('/admin/omset')->with('success', 'Data Berhasil Diubah!');
-    } 
+    }
 
-      /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -117,6 +131,7 @@ class OmsetController extends Controller
 
         return redirect('/admin/omset')->with('success', 'Data Berhasil Dihapus!');
     }
+
      public function cetakPDFOmset()
     {
       
