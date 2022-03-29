@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Laporan Jenis Usaha</title>
+    <title>Laporan Pajak</title>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
     <div>
         <div>
             <div class="doc-title">
-                <h3>Laporan Omset</h3>
+                <h3>Laporan Pajak</h3>
             </div>
 
         </div>
@@ -36,29 +36,25 @@
             <thead>
                 <tr>
                     <th scope="col" class="text-center">No</th>
-                    <th scope="col" class="text-center">Nama Usaha</th>
-                    <th scope="col" class="text-center">Nominal </th>
-                    <th scope="col" class="text-center">Pajak</th>
+                    <th>Nama Usaha</th>
+                    <th>Total Pajak</th>
+                    <th>Dibayar Pada</th>
 
 
                 </tr>
             </thead>
             <tbody>
                 @php $i=1 @endphp
-                @foreach ($rowsomset as $rows)
+                @foreach ($rowsPajak as $r)
                 <tr>
                     <td style="text-align: center;">
                         {{ $i++ }}
                     </td>
-                    <td>
-                        {{ $rows["nama_usaha"]  }}
+                    <td>{{ $r->nama_usaha }}</td>
                     </td>
-                    <td>
-                        {{ Rp.{{ number_format($r->nominal)  }}
+                    <td class="text-end">Rp.{{ number_format($r->total_pajak) }}
                     </td>
-                    <td>
-                        {{ Rp.{{ number_format($r->pajak)  }}
-                    </td>
+                    <td>{{ $r->created_at }}</td>
 
                 </tr>
                 @endforeach

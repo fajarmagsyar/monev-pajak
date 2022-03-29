@@ -30,6 +30,8 @@ Route::get('/logout', [AuthController::class, 'authenticate']);
 Route::get('/admin/cetak/pdf', [JenisUsahaController::class, 'cetakPDF']);
 Route::get('/admin/cetak-usaha/pdf', [UsahaController::class, 'cetakPDFUsaha']);
 Route::get('/admin/cetak-omset/pdf', [OmsetController::class, 'cetakPDFOmset']);
+Route::get('/admin/cetak-pajak/pdf', [TransaksiController::class, 'cetakPDFPajak']);
+Route::get('/admin/detail-pajak/pdf', [TransaksiController::class, 'cetakPDFDetailPajak']);
 
 
 Route::prefix('admin')->group(function () {
@@ -47,11 +49,11 @@ Route::prefix('admin')->group(function () {
     Route::resource('/omset', OmsetController::class);
     Route::get('/omset/tambah/data', [OmsetController::class, 'create']);
     Route::get('/omset/edit/data', [OmsetController::class, 'edit']);
-
-});
-
+    
     //PAJAK
     Route::get('/riwayat-pajak', [TransaksiController::class, 'riwayatPajak']);
     Route::get('/riwayat-pajak/tambah/{id}', [TransaksiController::class, 'paidPajakForm']);
     Route::get('/riwayat-pajak/detail/{id}/{usaha_id}', [TransaksiController::class, 'detailPajak']);
-    Route::post('/riwayat-pajak/store/', [TransaksiController::class, 'paidPajak']);
+    Route::post('/riwayat-pajak/store/', [TransaksiController::class, 'paidPajak']);    
+
+});
