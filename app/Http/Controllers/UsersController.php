@@ -149,4 +149,12 @@ class UsersController extends Controller
 
         return redirect('/admin/owner/roles/' . $role)->with('success', 'Data Berhasil Dihapus!');
     }
+     public function cetakPDFOwner()
+    {
+      
+        $rowsJenisUsaha = Users::select(['jenis_usaha.jenis_usaha_id', 'jenis_usaha.nama_jenis_usaha'])->get();
+        $pdf = PDF::loadview('template.pdf.jenis-usaha', ['rowsJenisUsaha' => $rowsJenisUsaha]);
+        // return $pdf->download('riwayat-pendidikan-' . auth()->user()->nip . '-' . time() . '.pdf');
+        return $pdf->stream('jenis-usaha-' . '-' . time() . '.pdf', array('Attachment' => 0));
+    }
 }

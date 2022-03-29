@@ -7,6 +7,7 @@ use App\Models\Transaksi;
 use App\Models\Usaha;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use PDF;
 
 class TransaksiController extends Controller
 {
@@ -67,4 +68,16 @@ class TransaksiController extends Controller
 
         return redirect('/admin/riwayat-pajak')->with('success', 'Data Berhasil Ditambahkan!');
     }
+    public function cetakPDFPajak()
+    {
+      
+        $rowsPajak = Transaksi::join('omset', 'omset.transaksi_id', '=', 'transaksi.transaksi_id')
+                ->join('usaha', 'usaha.usaha_id', '=', 'omset.usaha_id')
+                ->paginate(10);
+           
+        $pdf = PDF::loadview('template.pdf.pajak', ['rowsPajak' => $rowsPajak]);
+        // return $pdf->download('riwayat-pendidikan-' . auth()->user()->nip . '-' . time() . '.pdf');
+        return $pdf->stream('-pajak-' . '-' . time() . '.pdf', array('Attachment' => 0));
+    }
+   
 }

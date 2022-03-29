@@ -26,6 +26,13 @@ Route::get('/', [AdminController::class, 'loginForm']);
 Route::post('/auth', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
+// CETAK PDF
+Route::get('/admin/cetak/pdf', [JenisUsahaController::class, 'cetakPDF']);
+Route::get('/admin/cetak-usaha/pdf', [UsahaController::class, 'cetakPDFUsaha']);
+Route::get('/admin/cetak-omset/pdf', [OmsetController::class, 'cetakPDFOmset']);
+Route::get('/admin/cetak-pajak/pdf', [TransaksiController::class, 'cetakPDFPajak']);
+Route::get('/admin/detail-pajak/pdf', [TransaksiController::class, 'cetakPDFDetailPajak']);
+
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard']);
