@@ -50,7 +50,7 @@
                                         <tbody>
                                             @if (count($jenisUsahaRows) < 1)
                                                 <tr>
-                                                    <td colspan="4" class="text-center">Data belum ada, silahkan tambah
+                                                    <td colspan="5" class="text-center">Data belum ada, silahkan tambah
                                                         data</td>
                                                 </tr>
                                             @else
@@ -84,13 +84,13 @@
                                 </div>
 
                             </div>
-                            <center>
-                                {{ $jenisUsahaRows->links() }}
-                            </center>
                         </div>
 
                     </div>
 
+                    <center>
+                        {{ $jenisUsahaRows->links() }}
+                    </center>
 
                 </div>
                 <!-- end row -->
