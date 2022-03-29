@@ -18,13 +18,14 @@
                                 </p>
 
                                 <form action="/admin/usaha" class="parsley-examples" id="form-valid-parsley"
-                                    method="post">
+                                    method="post" enctype="multipart/form-data">
                                     @method('post')
                                     @csrf
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Jenis Usaha
                                             <span class="text-danger">*</span></label>
                                         <select name="jenis_usaha_id" class="form-select" id="">
+                                        <option value="">Pilih Jenis Usaha</option>
                                             @foreach($JenisUsaha as $r)
                                             <option value="{{$r->jenis_usaha_id}}">{{$r->nama_jenis_usaha}}</option>
                                             @endforeach
@@ -33,7 +34,7 @@
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Nama Usaha
                                             <span class="text-danger">*</span></label>
-                                        <input type="text" name="nama_jenis_usaha" parsley-trigger="change" required
+                                        <input type="text" name="nama_usaha" parsley-trigger="change" required
                                             placeholder="Masukkan nama usaha" class="form-control" id="userName" />
                                     </div>
                                     <div class="mb-3">
@@ -42,21 +43,21 @@
                                         <input type="text" name="npwp_usaha" parsley-trigger="change" required
                                             placeholder="Masukkan npwp usaha" class="form-control" id="userName" />
                                     </div>
-                                    <label for="suarat_ijin_usaha" class="form-label">Surat Ijin Usaha (Format: PDF Maksimal 1Mb) 
+                                    <label for="surat_ijin_usaha" class="form-label">Surat Ijin Usaha (Format: PDF Maksimal 1Mb) 
                                         <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="file" name="suarat_ijin_usaha" required
-                                            class="form-control" value="{{old('suarat_ijin_usaha')}}"
-                                            id="suarat_ijin_usaha" accept=".pdf" name="suarat_ijin_usaha">
-                                        <label class="input-group-text" for="suarat_ijin_usaha">Upload</label>
+                                        <input type="file" name="surat_ijin_usaha" required
+                                            class="form-control" value="{{old('surat_ijin_usaha')}}"
+                                            id="surat_ijin_usaha" accept=".pdf" name="surat_ijin_usaha">
+                                        <label class="input-group-text" for="surat_ijin_usaha">Upload</label>
                                     </div>
-                                    <label for="suarat_ijin_bpom" class="form-label">Surat Ijin BPOM (Format: PDF Maksimal 1Mb) 
+                                    <label for="surat_ijin_bpom" class="form-label">Surat Ijin BPOM (Format: PDF Maksimal 1Mb) 
                                         <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="file" name="suarat_ijin_bpom" required
-                                            class="form-control" value="{{old('suarat_ijin_bpom')}}"
-                                            id="suarat_ijin_bpom" accept=".pdf" name="suarat_ijin_bpom">
-                                        <label class="input-group-text" for="suarat_ijin_bpom">Upload</label>
+                                        <input type="file" name="surat_ijin_bpom" required
+                                            class="form-control" value="{{old('surat_ijin_bpom')}}"
+                                            id="surat_ijin_bpom" accept=".pdf" name="surat_ijin_bpom">
+                                        <label class="input-group-text" for="surat_ijin_bpom">Upload</label>
                                     </div>
                                     <label for="sertifikat_halal" class="form-label">Sertifikat Halal (Format: PDF Maksimal 1Mb) 
                                         <span class="text-danger">*</span></label>
