@@ -46,23 +46,26 @@
                                 <h4 class="text-uppercase mt-0">Login</h4>
                             </div>
 
-                            <form action="#">
+                            <form action="/auth" method="post">
+                                @csrf
                                 <div class="mb-3">
                                     <label for="emailaddress" class="form-label">Email</label>
-                                    <input class="form-control" type="email" id="emailaddress" required=""
-                                        placeholder="Masukkan Email">
+                                    <input class="form-control" type="email" id="emailaddress" name="email"
+                                        required="" placeholder="Masukkan Email">
                                 </div>
 
                                 <div class="mb-4">
                                     <label for="password" class="form-label">Kata Sandi</label>
-                                    <input class="form-control" type="password" required="" id="password"
-                                        placeholder="Masukkan Kata Sandi">
+                                    <input class="form-control" type="password" required="" name="password"
+                                        id="password" placeholder="Masukkan Kata Sandi">
                                 </div>
 
                                 <div class="mb-3 d-grid text-center">
                                     <button class="btn btn-primary" type="submit"> Log In </button>
                                 </div>
-                            </form>
+                                @if (session()->has('error'))
+                                    <div class="alert alert-danger">{{ session('error') }}</div>
+                                @endif
 
                         </div> <!-- end card-body -->
                     </div>

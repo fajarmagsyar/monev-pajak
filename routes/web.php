@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JenisUsahaController;
 use App\Http\Controllers\UsersController;
 
@@ -18,6 +19,8 @@ use App\Http\Controllers\UsersController;
 
 
 Route::get('/', [AdminController::class, 'loginForm']);
+Route::post('/auth', [AuthController::class, 'authenticate']);
+Route::get('/logout', [AuthController::class, 'authenticate']);
 
 
 Route::prefix('admin')->group(function () {
@@ -30,5 +33,4 @@ Route::prefix('admin')->group(function () {
 
     // USAHA
     Route::resource('/usaha', UsahaController::class);
-
 });

@@ -44,7 +44,7 @@
                         href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <img src="/assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
                         <span class="pro-user-name ms-1">
-                            Nama Profil <i class="mdi mdi-chevron-down"></i>
+                            {{ auth()->user()->nama }} <i class="mdi mdi-chevron-down"></i>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -68,7 +68,7 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="auth-logout.html" class="dropdown-item notify-item text-danger">
+                        <a href="/" class="dropdown-item notify-item text-danger">
                             <i class="fe-log-out"></i>
                             <span>Keluar</span>
                         </a>
@@ -134,7 +134,7 @@
                         class="rounded-circle img-thumbnail avatar-md">
                     <div class="dropdown">
                         <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"
-                            aria-expanded="false">Nama Lengkap User</a>
+                            aria-expanded="false">{{ auth()->user()->email }}</a>
                         <div class="dropdown-menu user-pro-dropdown">
 
                             <!-- item-->
@@ -158,7 +158,17 @@
                         </div>
                     </div>
 
-                    <p class="text-muted left-user-info">Jabatan</p>
+                    <p class="text-muted left-user-info">
+                        @canany(['admin'])
+                            Admin
+                        @endcanany
+                        @canany(['juruPajak'])
+                            Juru Pajak
+                        @endcanany
+                        @canany(['owner'])
+                            Owner
+                        @endcanany
+                    </p>
 
                     <ul class="list-inline">
                         <li class="list-inline-item">
