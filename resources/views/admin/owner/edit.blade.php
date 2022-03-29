@@ -17,72 +17,73 @@
                                     Pastikan data yang telah anda input benar dan sesuai dengan format yang tertera.
                                 </p>
 
-                                <form action="/admin/owner/{{ $userRow->user_id }}"
+                                <form action="/admin/owner/{{ $userRow->user_id }}/{{ $role }}"
                                     class="parsley-examples" id="form-valid-parsley" method="post">
                                     @method('PATCH')
                                     @csrf
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">NIK
                                             <span class="text-danger">*</span></label>
-                                        <input type="text" id="phone" name="no_identitas" onkeypress='return harusAngka(event)'  maxlength="16"parsley-trigger="change" required
-                                            placeholder="Masukkan nik"
-                                            value="{{ $userRow->no_identitas }}" class="form-control"
-                                             />
+                                        <input type="text" id="phone" name="no_identitas"
+                                            onkeypress='return harusAngka(event)' maxlength="16" parsley-trigger="change"
+                                            required placeholder="Masukkan nik" value="{{ $userRow->no_identitas }}"
+                                            class="form-control" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Nama Owner
                                             <span class="text-danger">*</span></label>
                                         <input type="text" name="nama" parsley-trigger="change" required
-                                            placeholder="Masukkan nama"
-                                            value="{{ $userRow->nama }}" class="form-control"
-                                            id="userName" />
+                                            placeholder="Masukkan nama" value="{{ $userRow->nama }}"
+                                            class="form-control" id="userName" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Jenis Kelamin
                                             <span class="text-danger">*</span></label>
-                                            <select name="jk" id="" class="form-control">
-                                                <option value="Laki-laki" {{ ($userRow->nama === 'Laki-laki')? 'selected' : '' }}>Laki-laki</option>
-                                                <option value="Perempuan" {{ ($userRow->nama === 'Laki-laki')? 'selected' : '' }}>Perempuan</option>
-                                            </select>      
+                                        <select name="jk" id="" class="form-control">
+                                            <option value="Laki-laki"
+                                                {{ $userRow->nama === 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                            <option value="Perempuan"
+                                                {{ $userRow->nama === 'Laki-laki' ? 'selected' : '' }}>Perempuan</option>
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Nomor Handphone
                                             <span class="text-danger">*</span></label>
-                                        <input type="text" id="phone" name="no_hp" onkeypress='return harusAngka(event)'  maxlength="12" parsley-trigger="change" required
-                                            placeholder="Masukkan nomor handphone"
-                                            value="{{ $userRow->no_hp }}" class="form-control"
-                                            id="userName" />
+                                        <input type="text" id="phone" name="no_hp" onkeypress='return harusAngka(event)'
+                                            maxlength="12" parsley-trigger="change" required
+                                            placeholder="Masukkan nomor handphone" value="{{ $userRow->no_hp }}"
+                                            class="form-control" id="userName" />
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Alamat
                                             <span class="text-danger">*</span></label>
-                                            <textarea name="alamat" id="" cols="30" rows="10" class="form-control" placeholder="Masukan Alamat">{{ $userRow->alamat }}</textarea>
+                                        <textarea name="alamat" id="" cols="30" rows="10" class="form-control"
+                                            placeholder="Masukan Alamat">{{ $userRow->alamat }}</textarea>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">NPWP
                                             <span class="text-danger">*</span></label>
-                                        <input type="text" id="phone" name="npwp" onkeypress='return harusAngka(event)'  maxlength="16"parsley-trigger="change" required
-                                            placeholder="Masukkan NPWP"
-                                            value="{{ $userRow->npwp }}" class="form-control"
-                                             />
+                                        <input type="text" id="phone" name="npwp" onkeypress='return harusAngka(event)'
+                                            maxlength="16" parsley-trigger="change" required placeholder="Masukkan NPWP"
+                                            value="{{ $userRow->npwp }}" class="form-control" />
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Email
                                             <span class="text-danger">*</span></label>
                                         <input type="text" name="email" parsley-trigger="change" required
-                                            placeholder="Masukkan email"
-                                            value="{{ $userRow->email }}" class="form-control"
-                                            id="userName" />
+                                            placeholder="Masukkan email" value="{{ $userRow->email }}"
+                                            class="form-control" id="userName" />
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Password
                                             <span class="text-danger">*</span></label>
                                         <input type="password" name="password" parsley-trigger="change" required
-                                            placeholder="Masukkan Password"  value="{{ $userRow->npwp }}" class="form-control" id="userName"  />
+                                            placeholder="Masukkan Password" value="{{ $userRow->npwp }}"
+                                            class="form-control" id="userName" />
                                     </div>
 
                                     <div class="text-end">
@@ -112,14 +113,11 @@
         $('form-valid-parsley').parsley();
     </script>
     <script>
- 
- function harusAngka(evt){
-  var charCode = (evt.which) ? evt.which : event.keyCode
-  if ((charCode < 48 || charCode > 57)&&charCode>32)
-  return false;
-  return true;
- }
-  
-  
- </script>
+        function harusAngka(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if ((charCode < 48 || charCode > 57) && charCode > 32)
+                return false;
+            return true;
+        }
+    </script>
 @endsection

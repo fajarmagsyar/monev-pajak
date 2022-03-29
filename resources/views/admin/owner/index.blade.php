@@ -28,7 +28,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="float-end">
-                                    <a class="btn btn-sm btn-outline-success" href="/admin/owner/create">+
+                                    <a class="btn btn-sm btn-outline-success"
+                                        href="/admin/owner/create/{{ $role }}">+
                                         TAMBAH</a>
                                 </div>
                                 <h4 class="mt-0 header-title">Data Owner</h4>
@@ -48,7 +49,6 @@
                                                 <th>Alamat</th>
                                                 <th>NPWP Owner</th>
                                                 <th>Email</th>
-                                                <th>Password</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -65,22 +65,22 @@
                                                         <td>{{ $r->no_identitas }}</td>
                                                         <td>{{ $r->nama }}</td>
                                                         <td>{{ $r->jk }}</td>
-                                                        <td>{{ $r->no_hp}}</td>
-                                                        <td>{{ $r->alamat}}</td>
-                                                        <td>{{ $r->npwp}}</td>
-                                                        <td>{{ $r->email}}</td>
-                                                        <td>{{ $r->password}}</td>
+                                                        <td>{{ $r->no_hp }}</td>
+                                                        <td>{{ $r->alamat }}</td>
+                                                        <td>{{ $r->npwp }}</td>
+                                                        <td>{{ $r->email }}</td>
                                                         <td class="text-center">
-                                                            <form action="/admin/owner/{{ $r->user_id }}"
+                                                            <form
+                                                                action="/admin/owner/{{ $r->user_id }}/{{ $role }}"
                                                                 method="post">
-                                                                <a href="/admin/owner/{{ $r->user_id }}/edit"
+                                                                <a href="/admin/owner/{{ $r->user_id }}/{{ $role }}/edit"
                                                                     class="btn btn-sm btn-warning">
                                                                     <i class="mdi mdi-pencil"></i>
                                                                 </a>
                                                                 @method('DELETE')
                                                                 @csrf
-                                                                <button type="submit"
-                                                                    class="btn btn-sm btn-danger" class="d-inline">
+                                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                                    class="d-inline">
                                                                     <i class="mdi mdi-delete"></i>
                                                                 </button>
                                                             </form>

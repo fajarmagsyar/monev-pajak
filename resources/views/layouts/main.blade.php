@@ -55,7 +55,7 @@
                         </div>
 
                         <!-- item-->
-                        <a href="contacts-profile.html" class="dropdown-item notify-item">
+                        {{-- <a href="contacts-profile.html" class="dropdown-item notify-item">
                             <i class="fe-user"></i>
                             <span>Akun Saya</span>
                         </a>
@@ -64,7 +64,7 @@
                         <a href="auth-lock-screen.html" class="dropdown-item notify-item">
                             <i class="fe-lock"></i>
                             <span>Tambah Admin</span>
-                        </a>
+                        </a> --}}
 
                         <div class="dropdown-divider"></div>
 
@@ -139,7 +139,7 @@
                         <div class="dropdown-menu user-pro-dropdown">
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            {{-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="fe-user me-1"></i>
                                 <span>Profil Saya</span>
                             </a>
@@ -148,7 +148,7 @@
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="fe-settings me-1"></i>
                                 <span>Tambah Admin</span>
-                            </a>
+                            </a> --}}
 
                             <!-- item-->
                             <a href="/logout" class="dropdown-item notify-item text-danger">
@@ -172,12 +172,6 @@
                     </p>
 
                     <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <a href="#" class="text-muted left-user-info">
-                                <i class="mdi mdi-cog"></i>
-                            </a>
-                        </li>
-
                         <li class="list-inline-item">
                             <a href="/logout">
                                 <i class="mdi mdi-power"></i>
@@ -220,9 +214,21 @@
 
                         @canany(['admin'])
                             <li>
-                                <a href="/admin/owner">
+                                <a href="/admin/owner/roles/owner">
                                     <i class="mdi mdi-badge-account"></i>
                                     <span> Owner </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/owner/roles/juru-pajak">
+                                    <i class="mdi mdi-badge-account"></i>
+                                    <span> Juru Pajak </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/owner/roles/admin">
+                                    <i class="mdi mdi-badge-account"></i>
+                                    <span> Admin </span>
                                 </a>
                             </li>
                         @endcanany

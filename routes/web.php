@@ -24,16 +24,24 @@ use App\Http\Controllers\UsersController;
 
 Route::get('/', [AdminController::class, 'loginForm']);
 Route::post('/auth', [AuthController::class, 'authenticate']);
-Route::get('/logout', [AuthController::class, 'authenticate']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard']);
+    Route::get('/dashboard/owner', [AdminController::class, 'ownerDash']);
 
     // JENIS USAHA
     Route::resource('/jenis-usaha', JenisUsahaController::class);
     Route::get('/jenis-usaha/tambah/data', [JenisUsahaController::class, 'tambah']);
+
+    //USERS
     Route::resource('/owner', UsersController::class);
+    Route::get('/owner/roles/{role}', [UsersController::class, 'index']);
+    Route::get('/owner/create/{role}', [UsersController::class, 'create']);
+    Route::delete('/owner/{id}/{role}', [UsersController::class, 'destroy']);
+    Route::get('/owner/{id}/{role}/edit', [UsersController::class, 'edit']);
+    Route::patch('/owner/{id}/{role}', [UsersController::class, 'update']);
 
     // USAHA
     Route::resource('/usaha', UsahaController::class);

@@ -17,15 +17,16 @@
                                     Pastikan data yang telah anda input benar dan sesuai dengan format yang tertera.
                                 </p>
 
-                                <form action="/admin/owner" class="parsley-examples" id="form-valid-parsley"
-                                    method="post">
+                                <form action="/admin/owner" class="parsley-examples" id="form-valid-parsley" method="post">
                                     @method('post')
                                     @csrf
+                                    <input type="hidden" value="{{ $role }}" name="role">
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">NIK
                                             <span class="text-danger">*</span></label>
-                                        <input type="text" id="phone"  onkeypress='return harusAngka(event)' maxlength="16" minlength="16" name="no_identitas" required
-                                            placeholder="Masukkan NIK" class="form-control"/>
+                                        <input type="text" id="phone" onkeypress='return harusAngka(event)' maxlength="16"
+                                            minlength="16" name="no_identitas" required placeholder="Masukkan NIK"
+                                            class="form-control" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Nama Owner
@@ -36,16 +37,17 @@
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Jenis Kelamin
                                             <span class="text-danger">*</span></label>
-                                       <select name="jk" id="" class="form-select">
-                                           <option value="Laki-laki">Laki-laki</option>
-                                           <option value="Perempuan">Perempuan</option>
-                                       </select>
+                                        <select name="jk" id="" class="form-select">
+                                            <option value="Laki-laki">Laki-laki</option>
+                                            <option value="Perempuan">Perempuan</option>
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Nomor Handphone
                                             <span class="text-danger">*</span></label>
-                                        <input type="text" name="no_hp" onkeypress='return harusAngka(event)' maxlength="12"  parsley-trigger="change" required
-                                            placeholder="Masukkan Nomor Handphone" class="form-control" id="userName" />
+                                        <input type="text" name="no_hp" onkeypress='return harusAngka(event)' maxlength="12"
+                                            parsley-trigger="change" required placeholder="Masukkan Nomor Handphone"
+                                            class="form-control" id="userName" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Alamat
@@ -55,8 +57,9 @@
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">NPWP
                                             <span class="text-danger">*</span></label>
-                                        <input type="text" onkeypress='return harusAngka(event)'  maxlength="16" name="npwp" parsley-trigger="change" required
-                                            placeholder="Masukkan NPWP" class="form-control" id="userName"  />
+                                        <input type="text" onkeypress='return harusAngka(event)' maxlength="16" name="npwp"
+                                            parsley-trigger="change" required placeholder="Masukkan NPWP"
+                                            class="form-control" id="userName" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="userName" class="form-label">Email
@@ -68,7 +71,7 @@
                                         <label for="userName" class="form-label">Password
                                             <span class="text-danger">*</span></label>
                                         <input type="password" name="password" parsley-trigger="change" required
-                                            placeholder="Masukkan Password" class="form-control" id="userName"  />
+                                            placeholder="Masukkan Password" class="form-control" id="userName" />
                                     </div>
                                     <div class="text-end">
                                         <button class="btn btn-primary waves-effect waves-light" type="submit"><i
@@ -96,15 +99,12 @@
     <script>
         $('form-valid-parsley').parsley();
     </script>
-<script>
- 
- function harusAngka(evt){
-  var charCode = (evt.which) ? evt.which : event.keyCode
-  if ((charCode < 48 || charCode > 57)&&charCode>32)
-  return false;
-  return true;
- }
-  
-  
- </script>
+    <script>
+        function harusAngka(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if ((charCode < 48 || charCode > 57) && charCode > 32)
+                return false;
+            return true;
+        }
+    </script>
 @endsection
