@@ -106,17 +106,19 @@
                                                     </td>
                                                     <td class="text-center align-middle">
                                                         <form action="/admin/usaha/{{ $r->usaha_id }}" method="post">
-                                                            <a href="/admin/usaha/{{ $r->usaha_id }}/edit"
-                                                                class="btn btn-sm btn-warning mb-2">
-                                                                <i class="mdi mdi-pencil"></i>
-                                                            </a>
-                                                            @method('DELETE')
-                                                            @csrf
-                                                            <button type="submit" href="/admin/usaha/{{ $r->usaha_id }}"
-                                                                class="btn btn-sm btn-danger mb-2" class="d-inline">
-                                                                <i class="mdi mdi-delete"></i>
-                                                            </button>
-                                                            <br \>
+                                                            @canany(['owner', 'admin'])
+                                                                <a href="/admin/usaha/{{ $r->usaha_id }}/edit"
+                                                                    class="btn btn-sm btn-warning mb-2">
+                                                                    <i class="mdi mdi-pencil"></i>
+                                                                </a>
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <button type="submit" href="/admin/usaha/{{ $r->usaha_id }}"
+                                                                    class="btn btn-sm btn-danger mb-2" class="d-inline">
+                                                                    <i class="mdi mdi-delete"></i>
+                                                                </button>
+                                                                <br \>
+                                                            @endcanany
                                                             <a href="/admin/omset/{{ $r->usaha_id }}"
                                                                 class="btn btn-sm btn-info mb-2">
                                                                 <i class="mdi mdi-chart-areaspline"></i> Omset
