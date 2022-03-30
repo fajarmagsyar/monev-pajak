@@ -62,12 +62,24 @@
                                                 @foreach ($UsahaRows as $key => $r)
                                                     <tr>
                                                         <th scope="row">{{ $key = $key + 1 }}</th>
-                                                        <td>{{ $r->jenis_usaha_id }}</td>
+                                                        <td>{{ $r->nama_jenis_usaha}}</td>
                                                         <td>{{ $r->nama_usaha }}</td>
                                                         <td>{{ $r->npwp_usaha }}</td>
-                                                        <td>{{ $r->surat_ijin_usaha }}</td>
-                                                        <td>{{ $r->surat_ijin_bpom }}</td>
-                                                        <td>{{ $r->sertifikat_halal }}</td>
+                                                        <td scope="row" class="text-center">
+                                                            <a href="{{ $r->surat_ijin_usaha }}">
+                                                            <i class="mdi mdi-file-pdf-outline" style="font-size: 25px;"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td scope="row" class="text-center">
+                                                            <a href="{{ $r->surat_ijin_bpom }}">
+                                                            <i class="mdi mdi-file-pdf-outline" style="font-size: 25px;"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td scope="row" class="text-center">
+                                                            <a href="{{ $r->sertifikat_halal }}">
+                                                            <i class="mdi mdi-file-pdf-outline" style="font-size: 25px;"></i>
+                                                            </a>
+                                                        </td>
                                                         <td>{{ $r->created_at }}</td>
                                                         <td>{{ $r->updated_at }}</td>
                                                         <td class="text-center">
