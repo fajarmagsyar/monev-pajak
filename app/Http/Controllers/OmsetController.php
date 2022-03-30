@@ -76,8 +76,9 @@ class OmsetController extends Controller
                 ->where('usaha.usaha_id', $id)
                 ->orderBy('usaha.created_at', 'DESC')
                 ->paginate(10),
-            'usahaRows' => Usaha::get()
-                ->where('user_id', auth()->user()->user_id),
+            'usahaRows' => Usaha::where('user_id', auth()->user()->user_id)
+                ->get(),
+            'usaha_id' => $id,
         ]);
     }
 
@@ -132,14 +133,12 @@ class OmsetController extends Controller
         return redirect('/admin/omset')->with('success', 'Data Berhasil Dihapus!');
     }
 
-     public function cetakPDFOmset()
+    public function cetakPDFOmset()
     {
-      
-        $rowsomset = Omset::join('usaha','usaha.usaha_id', '=', 'omset.usaha_id')->orderBy('usaha.created_at', 'DESC')->get();
+
+        $rowsomset = Omset::join('usaha', 'usaha.usaha_id', '=', 'omset.usaha_id')->orderBy('usaha.created_at', 'DESC')->get();
         $pdf = PDF::loadview('template.pdf.omset', ['rowsomset' => $rowsomset]);
         // return $pdf->download('riwayat-pendidikan-' . auth()->user()->nip . '-' . time() . '.pdf');
         return $pdf->stream('-omset-' . '-' . time() . '.pdf', array('Attachment' => 0));
     }
-
-
 }

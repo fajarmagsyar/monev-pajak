@@ -71,11 +71,14 @@ class UsahaController extends Controller
         $name_ijin_bpom = '/unggah/ijin-bpom/' . $file_ijin_bpom . '.pdf';
 
         // Upload Sertifikat Halal
-        $temp_sertifikat_halal = $request->file('sertifikat_halal')->getPathName();
-        $file_sertifikat_halal = $request->input('nama_usaha') . "-Sertifikat-Halal" . time();
-        $folder_sertifikat_halal = "unggah/sertifikat-halal/" . $file_sertifikat_halal . ".pdf";
-        move_uploaded_file($temp_sertifikat_halal, $folder_sertifikat_halal);
-        $name_sertifikat_halal = '/unggah/sertifikat-halal/' . $file_sertifikat_halal . '.pdf';
+        $name_sertifikat_halal = null;
+        if ($request->file('sertifikat_halal')) {
+            $temp_sertifikat_halal = $request->file('sertifikat_halal')->getPathName();
+            $file_sertifikat_halal = $request->input('nama_usaha') . "-Sertifikat-Halal" . time();
+            $folder_sertifikat_halal = "unggah/sertifikat-halal/" . $file_sertifikat_halal . ".pdf";
+            move_uploaded_file($temp_sertifikat_halal, $folder_sertifikat_halal);
+            $name_sertifikat_halal = '/unggah/sertifikat-halal/' . $file_sertifikat_halal . '.pdf';
+        }
 
         $data = [
             'jenis_usaha_id' => $request->input('jenis_usaha_id'),
@@ -197,13 +200,12 @@ class UsahaController extends Controller
         return redirect('/admin/usaha')->with('success', 'Data Berhasil Dihapus!');
     }
 
-     public function cetakPDFUsaha()
+    public function cetakPDFUsaha()
     {
-      
-        $rowsUsaha = Usaha::join('jenis_usaha' ,'usaha.jenis_usaha_id','=','jenis_usaha.jenis_usaha_id')->join('users' ,'usaha.user_id','=','users.user_id')->orderBy('usaha.created_at', 'DESC')->get();
+
+        $rowsUsaha = Usaha::join('jenis_usaha', 'usaha.jenis_usaha_id', '=', 'jenis_usaha.jenis_usaha_id')->join('users', 'usaha.user_id', '=', 'users.user_id')->orderBy('usaha.created_at', 'DESC')->get();
         $pdf = PDF::loadview('template.pdf.usaha', ['rowsUsaha' => $rowsUsaha]);
         // return $pdf->download('riwayat-pendidikan-' . auth()->user()->nip . '-' . time() . '.pdf');
         return $pdf->stream('-usaha-' . '-' . time() . '.pdf', array('Attachment' => 0));
     }
-
 }
