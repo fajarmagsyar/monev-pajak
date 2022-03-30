@@ -25,6 +25,7 @@
                                         <label for="userName" class="form-label">Jenis Usaha
                                             <span class="text-danger">*</span></label>
                                         <select name="jenis_usaha_id" class="form-select" id="">
+                                        <option value="">Pilih Jenis Usaha</option>
                                             @foreach($JenisUsaha as $r)
                                             <option value="{{$r->jenis_usaha_id}}">{{$r->nama_jenis_usaha}}</option>
                                             @endforeach
