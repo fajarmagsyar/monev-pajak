@@ -27,6 +27,30 @@
                                         <input type="text" name="nama_jenis_usaha" parsley-trigger="change" required
                                             placeholder="Masukkan jenis usaha" class="form-control" id="userName" />
                                     </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="userName" class="form-label">PPN (Omset)
+                                                <span class="text-danger">*</span></label>
+
+                                            <div class="input-group mb-3">
+                                                <input type="number" class="form-control"
+                                                    placeholder="Masukkan jumlah potongan PPN (Omset)" aria-label="ppn1"
+                                                    name="ppn1" aria-describedby="basic-addon1">
+                                                <span class="input-group-text" id="basic-addon1">%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="userName" class="form-label">PPN (Pajak Akhir)
+                                                <span class="text-danger">*</span></label>
+
+                                            <div class="input-group mb-3">
+                                                <input type="number" class="form-control"
+                                                    placeholder="Masukkan jumlah potongan PPN (Pajak Akhir)"
+                                                    aria-label="ppn2" aria-describedby="basic-addon1" name="ppn2">
+                                                <span class="input-group-text" id="basic-addon1">%</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="text-end">
                                         <button class="btn btn-primary waves-effect waves-light" type="submit"><i
                                                 class="mdi mdi-pencil-box"></i> Simpan</button>

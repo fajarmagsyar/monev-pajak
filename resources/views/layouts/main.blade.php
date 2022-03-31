@@ -279,8 +279,8 @@
                     <div class="col-md-6">
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> &copy; Monev Pajak created with <i class="mdi mdi-heart"></i> by <a
-                            href="https://theuselessweb.com/">KOMINFO Dev Team</a>
+                        </script> &copy; KOMODO | Komoditi Monev Pajak created with <i
+                            class="mdi mdi-heart"></i> by <a href="https://theuselessweb.com/">KOMINFO Dev Team</a>
                     </div>
                     <div class="col-md-6">
                         <div class="text-md-end footer-links d-none d-sm-block">

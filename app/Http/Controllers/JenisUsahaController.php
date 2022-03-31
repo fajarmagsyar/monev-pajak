@@ -42,6 +42,8 @@ class JenisUsahaController extends Controller
     {
         $data = [
             'nama_jenis_usaha' => $request->input('nama_jenis_usaha'),
+            'ppn1' => $request->input('ppn1'),
+            'ppn2' => $request->input('ppn2'),
         ];
 
         JenisUsaha::create($data);
@@ -71,7 +73,7 @@ class JenisUsahaController extends Controller
         return view('admin.jenis-usaha.edit', [
             'page' => 'Edit Jenis Usaha | Monev Pajak',
             'pageTitle' => 'Edit Jenis Usaha',
-            'jenisUsahaRow' => JenisUsaha::find($id)->first(),
+            'jenisUsahaRow' => JenisUsaha::where('jenis_usaha_id', $id)->first(),
         ]);
     }
 
@@ -86,6 +88,8 @@ class JenisUsahaController extends Controller
     {
         $data = [
             'nama_jenis_usaha' => $request->input('nama_jenis_usaha'),
+            'ppn1' => $request->input('ppn1'),
+            'ppn2' => $request->input('ppn2'),
         ];
 
         JenisUsaha::find($id)
@@ -115,9 +119,9 @@ class JenisUsahaController extends Controller
             'pageTitle' => 'Tambah Jenis Usaha',
         ]);
     }
-     public function cetakPDF()
+    public function cetakPDF()
     {
-      
+
         $rowsJenisUsaha = JenisUsaha::select(['jenis_usaha.jenis_usaha_id', 'jenis_usaha.nama_jenis_usaha'])->get();
         $pdf = PDF::loadview('template.pdf.jenis-usaha', ['rowsJenisUsaha' => $rowsJenisUsaha]);
         // return $pdf->download('riwayat-pendidikan-' . auth()->user()->nip . '-' . time() . '.pdf');

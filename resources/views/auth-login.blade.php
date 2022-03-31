@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Log In | Adminto - Responsive Admin Dashboard Template</title>
+    <title>Login - KOMODO | Komoditi Monev Pajak</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -43,7 +43,7 @@
                         <div class="card-body p-4">
 
                             <div class="text-center mb-4">
-                                <h4 class="text-uppercase mt-0">Login</h4>
+                                <h3 class="text-uppercase mt-0">Login</h3>
                             </div>
 
                             <form action="/auth" method="post">

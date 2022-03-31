@@ -32,11 +32,10 @@ class OmsetController extends Controller
      */
     public function create()
     {
-
         return view('admin.omset.create', [
             'page' => 'Tambah Omset | Monev Pajak',
             'pageTitle' => 'Tambah Omset',
-            'usahaRows' => Usaha::where('user_id', auth()->user()->user_id)->get(),
+            'usahaRows' => Usaha::join('jenis_usaha', 'jenis_usaha.jenis_usaha_id', '=', 'usaha.jenis_usaha_id')->where('user_id', auth()->user()->user_id)->get(),
         ]);
     }
 

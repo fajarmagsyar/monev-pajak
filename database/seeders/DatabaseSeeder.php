@@ -65,25 +65,19 @@ class DatabaseSeeder extends Seeder
         ]);
 
         JenisUsaha::create([
-            'nama_jenis_usaha' => 'Pakaian'
+            'nama_jenis_usaha' => 'Restoran',
+            'ppn1' => 15,
+            'ppn2' => 10,
         ]);
         JenisUsaha::create([
-            'nama_jenis_usaha' => 'Kuliner'
+            'nama_jenis_usaha' => 'Hotel',
+            'ppn1' => 20,
+            'ppn2' => 10,
         ]);
         JenisUsaha::create([
-            'nama_jenis_usaha' => 'Elektronik'
-        ]);
-        JenisUsaha::create([
-            'nama_jenis_usaha' => 'Oleh-oleh'
-        ]);
-        JenisUsaha::create([
-            'nama_jenis_usaha' => 'Furnitur'
-        ]);
-        JenisUsaha::create([
-            'nama_jenis_usaha' => 'Pakaian'
-        ]);
-        JenisUsaha::create([
-            'nama_jenis_usaha' => 'Serba Ada'
+            'nama_jenis_usaha' => 'Lainnya',
+            'ppn1' => 10,
+            'ppn2' => 10,
         ]);
     }
 }

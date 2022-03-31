@@ -90,8 +90,8 @@
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Total Pajak</label>
                                                 <h1>Rp.{{ number_format($pajakTotal) }}</h1>
-                                                <p class="text-muted">*Pajak adalah 10% dari total omset atau
-                                                    penghasilan bersih</p>
+                                                <p class="text-muted">*Total Pajak dihitung dari: (nominal omset x
+                                                    ppn omset%) x ppn pajak%</p>
                                             </div>
                                         </div>
 

@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('npwp', 16)->nullable();
             $table->string('email')->nullable();
             $table->string('password')->nullable();
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
         DB::statement('ALTER TABLE users ALTER COLUMN user_id SET DEFAULT uuid_generate_v4();');

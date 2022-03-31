@@ -31,8 +31,10 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="float-end">
-                                        <a class="btn btn-sm btn-outline-success" href="/admin/omset/tambah/data">+
-                                            TAMBAH</a>
+                                        @canany(['owner'])
+                                            <a class="btn btn-sm btn-outline-success" href="/admin/omset/tambah/data">+
+                                                TAMBAH</a>
+                                        @endcanany
 
                                         <a href="/admin/cetak-omset/pdf" class="btn btn-sm btn-outline-info"><i
                                                 class="mdi mdi-printer"></i> Cetak
