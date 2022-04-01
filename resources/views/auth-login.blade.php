@@ -37,7 +37,6 @@
                         <a href="index.html">
                             <img src="/assets/images/logo-dark.png" alt="" height="80" class="mx-auto">
                         </a>
-                        <p style="font-size: 20px"><b>K</b>ota <b>K</b>upang</p>
                     </div>
                     <div class="card shadow" style="border-radius: 25px">
                         <div class="card-body p-4">
@@ -73,8 +72,8 @@
 
                     <div class="row mt-3">
                         <div class="col-12 text-center">
-                            <p> <a href="pages-recoverpw.html" class="text-muted ms-1"><i
-                                        class="fa fa-lock me-1"></i>Lupa password?</a></p>
+                            <p> <a href="#" class="text-muted ms-1"><i class="fa fa-lock me-1"></i>Lupa password?</a>
+                            </p>
                             <p class="text-muted">Belum ada akun?
                                 <a href="#" class="text-dark ms-1"><b>Buat Akun</b></a>
                             </p>

@@ -50,9 +50,9 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
                         <!-- item-->
-                        <div class="dropdown-header noti-title">
+                        {{-- <div class="dropdown-header noti-title">
                             <h6 class="text-overflow m-0">Profile</h6>
-                        </div>
+                        </div> --}}
 
                         <!-- item-->
                         {{-- <a href="contacts-profile.html" class="dropdown-item notify-item">
@@ -66,7 +66,7 @@
                             <span>Tambah Admin</span>
                         </a> --}}
 
-                        <div class="dropdown-divider"></div>
+                        {{-- <div class="dropdown-divider"></div> --}}
 
                         <!-- item-->
                         <a href="/" class="dropdown-item notify-item text-danger">
@@ -91,16 +91,16 @@
                     <span class="logo-sm">
                         <img src="/assets/images/logo-sm.png" alt="" height="22">
                     </span>
-                    <span class="logo-lg">
-                        <img src="/assets/images/logo-dark.png" alt="" height="30">
+                    <span class="logo-lg mt-3 mb-2">
+                        <img src="/assets/images/logo-dark.png" alt="" height="50">
                     </span>
                 </a>
                 <a href="/admin/" class="logo logo-dark text-center">
                     <span class="logo-sm">
                         <img src="/assets/images/logo-sm.png" alt="" height="22">
                     </span>
-                    <span class="logo-lg">
-                        <img src="/assets/images/logo-dark.png" alt="" height="30">
+                    <span class="logo-lg mt-3 mb-2">
+                        <img src="/assets/images/logo-dark.png" alt="" height="50">
                     </span>
                 </a>
             </div>
